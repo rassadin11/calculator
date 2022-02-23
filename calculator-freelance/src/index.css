@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Museo';
+  src: url('./fonts/Museo500-Regular.woff') format('woff'),
+    url('./fonts/Museo500-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Digital Numbers';
+  src: url('./fonts/DigitalNumbers-Regular.woff') format('woff'),
+    url('./fonts/DigitalNumbers-Regular.woff2') format('woff2');
+}
+
+body {
+  margin: 0;
+  font-family: 'Museo';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
