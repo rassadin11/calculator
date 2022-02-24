@@ -20,9 +20,17 @@ export async function setOperations(
   })
 
   if (+exersize !== +result) {
-    return instance.post('expression', {
+    return await instance.post('expression', {
       expression: exersize,
       result,
     })
   }
+}
+
+export async function getOperations() {
+  const data = await instance
+    .get('expression')
+    .then((response: { data: any }) => response.data)
+  console.log(data)
+  return data
 }

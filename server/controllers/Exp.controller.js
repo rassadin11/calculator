@@ -1,4 +1,4 @@
-import ExpressionModel from '../models/ExpressionModel.js'
+import { db } from '../db.js'
 
 class ExpController {
   async addExpression(req, res) {
@@ -6,22 +6,20 @@ class ExpController {
     if (!expression || !result)
       return res.json({ message: 'Field is empty', error: -1 })
 
-    const newOperation = new ExpressionModel({ expression, result })
-    newOperation.save()
+    db.run(`INSERT INTO calculate(expression, result) VALUES(?, ?)`, [
+      expression,
+      result,
+    ])
 
-    res.json(newOperation)
+    res.json({ message: 'Success' })
   }
 
   async getAllExpression(req, res) {
-    const operations = await ExpressionModel.find()
-    res.json(operations)
-  }
+    db.all(`SELECT * FROM calculate`, [], (err, rows) => {
+      if (err) return res.json({ message: err.message, error: -1 })
 
-  async getExpression(req, res) {
-    const { id } = req.params
-    const operation = await ExpressionModel.findOne({ _id: id })
-
-    res.json(operation)
+      return res.json(rows)
+    })
   }
 }
 
